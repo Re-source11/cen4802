@@ -53,7 +53,8 @@ import java.net.InetSocketAddress;
               double weight = Double.parseDouble(weightText);
               double reps = Double.parseDouble(repsText);
               double orm = weight * (1 + reps / 30.0);
-              String response = "Estimated 1RM: " + orm + " lbs";
+              double brzycki = weight * (36.0 / (37.0 - reps));
+              String response = "Epley: " + orm + " lbs | Brzycki: " + brzycki + " lbs";
         // Send HTTP response headers (Status Code: 200 OK, Content Length)
               exchange.sendResponseHeaders(200, response.getBytes().length);
 
