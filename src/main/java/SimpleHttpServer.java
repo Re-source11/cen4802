@@ -23,12 +23,18 @@ import java.net.InetSocketAddress;
             server.start();
         }
 
+        public static double epley(double weight, int reps) {
+            return weight * (1 + reps / 30.0);
+        }
+        public static double brzycki(double weight, int reps){
+            return weight * (36.0/(37.0 - reps));
+        }
         // Custom handler to process incoming HTTP requests
         static class RootHandler implements HttpHandler {
 
             @Override
             public void handle(HttpExchange exchange) throws IOException {
-                String response = "RepMax server. Use /orm?weight=225&reps=5";
+                String response = "RepMax server -Maven Built V2. Use /orm?weight=225&reps=5";
 
                 // Send HTTP response headers (Status Code: 200 OK, Content Length)
                 exchange.sendResponseHeaders(200, response.getBytes().length);
@@ -43,18 +49,18 @@ import java.net.InetSocketAddress;
         }
 
 
-        static class OrmHandler implements HttpHandler{
+        public static class OrmHandler implements HttpHandler{
           @Override
           public void handle(HttpExchange exchange) throws IOException {
               String query = exchange.getRequestURI().getQuery();
               String[] parts = query.split("&");
               String weightText = parts[0].split("=")[1];
               String repsText = parts[1].split("=")[1];
-              double weight = Double.parseDouble(weightText);
-              double reps = Double.parseDouble(repsText);
-              double orm = weight * (1 + reps / 30.0);
-              double brzycki = weight * (36.0 / (37.0 - reps));
-              String response = "Epley: " + orm + " lbs | Brzycki: " + brzycki + " lbs";
+              double weight = Integer.parseInt(weightText);
+              int reps = (int) Double.parseDouble(repsText);
+              double orm = epley(weight, reps);
+              double brz = brzycki(weight, reps);
+              String response = "Epley: " + orm + " lbs | Brzycki: " + brz + " lbs";
         // Send HTTP response headers (Status Code: 200 OK, Content Length)
               exchange.sendResponseHeaders(200, response.getBytes().length);
 
@@ -65,5 +71,6 @@ import java.net.InetSocketAddress;
         // Close the stream (crucial to finalize the exchange)
               os.close();
      }
-    }
-  }
+
+            }
+        }
