@@ -34,7 +34,7 @@ import java.net.InetSocketAddress;
 
             @Override
             public void handle(HttpExchange exchange) throws IOException {
-                String response = "RepMax server -Maven Built V2. Use /orm?weight=225&reps=5";
+                String response = "RepMax server -CI Built V3. Use /orm?weight=225&reps=5";
 
                 // Send HTTP response headers (Status Code: 200 OK, Content Length)
                 exchange.sendResponseHeaders(200, response.getBytes().length);
