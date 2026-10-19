@@ -29,7 +29,7 @@ import java.net.InetSocketAddress;
         public static double brzycki(double weight, int reps){
             return weight * (36.0/(37.0 - reps));
         }
-        public static double lombardi(double weight, int reps) {return weight * Math.pow(reps, 0.10);}
+        public static double lombardi(double weight, int reps) {return weight * Math.pow(reps, 0.20);}
         // Custom handler to process incoming HTTP requests
         static class RootHandler implements HttpHandler {
 
