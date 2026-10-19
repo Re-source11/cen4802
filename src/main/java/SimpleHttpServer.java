@@ -29,12 +29,13 @@ import java.net.InetSocketAddress;
         public static double brzycki(double weight, int reps){
             return weight * (36.0/(37.0 - reps));
         }
+        public static double lombardi(double weight, int reps) {return weight * Math.pow(reps, 0.10);}
         // Custom handler to process incoming HTTP requests
         static class RootHandler implements HttpHandler {
 
             @Override
             public void handle(HttpExchange exchange) throws IOException {
-                String response = "RepMax server -CI Built V3. Use /orm?weight=225&reps=5";
+                String response = "RepMax server -(Lombardi Added) V5. Use /orm?weight=225&reps=5";
 
                 // Send HTTP response headers (Status Code: 200 OK, Content Length)
                 exchange.sendResponseHeaders(200, response.getBytes().length);
@@ -60,7 +61,8 @@ import java.net.InetSocketAddress;
               int reps = (int) Double.parseDouble(repsText);
               double orm = epley(weight, reps);
               double brz = brzycki(weight, reps);
-              String response = "Epley: " + orm + " lbs | Brzycki: " + brz + " lbs";
+              double lom = lombardi(weight, reps);
+              String response = "Epley: " + orm + " lbs | Brzycki: " + brz + " lbs | Lombardi: " + lom + " lbs";
         // Send HTTP response headers (Status Code: 200 OK, Content Length)
               exchange.sendResponseHeaders(200, response.getBytes().length);
 

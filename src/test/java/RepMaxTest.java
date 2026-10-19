@@ -18,4 +18,6 @@ class RepMaxTest {
     @Test
     void brzyckiKnownValue(){assertEquals(100.0, SimpleHttpServer.brzycki(100, 1), 0.01);}
 
+    @Test
+    void LombardiKnownValue(){assertEquals(264.29, SimpleHttpServer.lombardi(225, 5), 0.01);}
 }
