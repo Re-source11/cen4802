@@ -16,3 +16,5 @@ jobs:
         with:
           name: cen4802-jar
           path: target/*.jar
+      - name: Build container image
+        run: docker build -t cen4802:${{ github.sha }} .
